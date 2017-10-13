@@ -1,0 +1,61 @@
+
+<div class="container">
+
+<div class="banner">
+	 <h2>Clientes</h2>
+</div>
+ 
+
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="map-system">
+      <div id="map" class="map"></div>
+    </div> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+Search: <input id="search" name="search" type="text" autocomplete="off" title="Search location, company, description..." />  
+
+  </div>
+</div>                                                                                
+  <div class="table-responsive banner">          
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Num. de Socio</th>
+        <th>Apellido - Nombre</th>
+        <th>Dirección</th>
+        <th>Estado</th>      
+      </tr>
+    </thead>
+    <tbody>
+       <div id="table_users">
+        <%= render partial: 'table_user' %>
+          
+        </div>
+   
+
+    </tbody>
+  </table>
+  </div>
+
+
+
+
+</div>
+
+
+
+<script type="text/javascript">
+  // viewZonesAll(<%=raw @polyjson %>, 1);
+  $(document).ready(function() {
+   viewZonesAll(<%=raw @polyjson %>, 1);
+   initMap(<%=raw @map_hash.to_json %>, 1);
+  });
+// mapsMarkerZones(<%=raw @map_hash.to_json  %>,<%=raw @polyjson %>, 1);
+  
+</script>
