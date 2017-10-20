@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   resources :addresses
   resources :customers do
     collection do
+      get 'load'
       post 'import'
+      post 'check'
+      post 'checkok'
     end
   end
   root to: 'home#home'

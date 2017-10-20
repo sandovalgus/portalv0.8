@@ -26,9 +26,10 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-              <li><%= link_to 'LIstado Clientes', customers_path %></li>
+              <li><%= link_to 'Listado Clientes', customers_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "Nuevo Cliente", new_customer_path, :class => "dropdown-item" %> </li>
+              <li><%= link_to "Importar Clientes", '/customers/load', :class => "dropdown-item" %> </li>
           </ul>
         </li>
 

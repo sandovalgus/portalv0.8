@@ -6,6 +6,6 @@ class ImportWorker < ApplicationController
 		puts " *******************************  Importando clientes **************************************"
 		Customer.import(path, params)
 		puts " *******************************  Actualizando tabla importacion ***************************"
-		Import.update(true)
+		Import.create(state: true)
 	end
 end

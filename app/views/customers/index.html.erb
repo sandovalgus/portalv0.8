@@ -18,6 +18,7 @@
       </tr>
     </thead>
     <tbody>
+    <%= will_paginate @customers %>  
     <% @customers.each do |customer| %>
       <tr>
         <td><%= customer.n_socio %></td>
@@ -42,18 +43,11 @@
     <% end %>
     </tbody>
   </table>
-  
+  <%= will_paginate @customers %> 
   <div class="row">          
-    <div class="row">
-   <h3>Importar Socios</h3>
-    <%= form_tag import_customers_path, multipart:true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag "Importar", class:"btn btn-default" %>
-    <% end %>
-  </div>  
-
-  <div class="map-system">
-      <div id="map" class="map"></div>
+ 
+    <div class="map-system animated fadeOut map-system-down">
+        <div id="map" class="map"></div>
     </div> 
 
   </div>

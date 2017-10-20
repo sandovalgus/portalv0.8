@@ -5,15 +5,14 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     # @customers = Customer.all
-    @customers= Customer.includes(:addresses).all
+    @customers= Customer.includes(:addresses).all.paginate(page: params[:page], per_page: 10)
     @addres = Address.all
 
     @map_hash = Gmaps4rails.build_markers(@addres) do |address, marker|
       customer = Customer.select(:nombre, :apellido, :n_socio, :estado).where(:id => address.customer_id).last
       marker.lat address.latitude
       marker.lng address.longitude
-      marker.infowindow render_to_string(:partial => "info", :locals =>{:address => address, :customer => customer})
-    
+      marker.infowindow render_to_string(:partial => "info", :locals =>{:address => address, :customer => customer}) 
     end
   end
 
@@ -91,19 +90,31 @@ class CustomersController < ApplicationController
     end
   end
 
+  # CHECK /customers/1
+  # CHECK /customers/1.json
+  def check
+    @import = Import.last
+    puts @import.state
+    render js: @import.state.to_s
+  end
+
+  def checkok
+    @import = Import.create(state: false)
+    puts import.state
+  end
+
   def import
     #Customer.import(params[:file])
     ext = params[:file]
     ImportWorker.perform_async(ext.path, ext)
 
-    puts " *******************************  ******************* **************************************"
-    puts " *******************************  ******************* **************************************"
-    puts ext.path
-    puts " *******************************  ******************* **************************************"
-    puts " *******************************  ******************* **************************************"
-
-
     redirect_to root_url, notice: "Los se están importando. Te estaremos avisando cuando estén listos."
+  end
+
+  def load
+    puts "okokokokokok"
+    puts "okokokokokok"
+    puts "okokokokokok"
   end
 
   private

@@ -1,4 +1,4 @@
-
+    <%= will_paginate @customers %>
     <% @customers.each do |customer| %>
       <tr>
         <td><%= customer.n_socio %></td>
@@ -23,3 +23,4 @@
 
       </tr>
     <% end %>
+    <%= will_paginate @customers %>

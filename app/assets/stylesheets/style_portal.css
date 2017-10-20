@@ -25,7 +25,7 @@ padding: 5px;
 
 /*cuerpo*/
 .wrapper {
-    background-color: #f3f3f4;
+    /*background-color: #f3f3f4;*/
     padding-top: 50px;
     padding-left: 25px;
     padding-right: 25px;
@@ -36,17 +36,28 @@ padding: 5px;
 
 /*mao*/
 
-.map-system{
+.map-system {
+  z-index: 1;
   width: auto;
   height: auto;
   padding: 15px;
   background-color: white;
+  /*z-index: 1;*/
+  position: fixed;
+  bottom: 50px;
+  background-color: #000000;
+  width: 80%;
+  margin: 0 7%;
+  color: white;
 }
 
-.map{
+.map-system-down {
+  display:none;
+}
+
+.map {
     width: auto;
-  height: 500px;
-  padding: 10px;
+    height: 400px;
 }
 
 /*titulo*/
@@ -340,3 +351,21 @@ select option[value="34bf49"] { /* value not val */
     height: 150px;
 }
 
+.navbarfooter {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    bottom: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index: 1;
+}
+
+.navbarfooter p {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 6px 10px;
+    text-decoration: none;
+    margin: 0;
+}

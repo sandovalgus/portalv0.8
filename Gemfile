@@ -8,6 +8,7 @@ end
 gem 'sidekiq'
 gem 'sinatra', github: 'sinatra/sinatra'
 
+gem 'will_paginate', '~> 3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'

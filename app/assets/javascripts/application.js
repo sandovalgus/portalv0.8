@@ -19,3 +19,37 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(function(){
+
+	$('#mapa').click( function(  ) {
+		
+		if ($( ".map-system" ).hasClass( "map-system-down" )) {
+			$('.map-system').removeClass('map-system-down');				
+			console.log('entro/downs');
+			
+		};
+
+		if ( $( ".map-system" ).hasClass( "animated bounceOutLeft" )) {
+
+			$('.map-system').removeClass('animated bounceOutLeft');
+			$('.map-system').addClass('animated bounceInLeft');
+
+			console.log('entro1');
+
+		} else if ( $( ".map-system" ).hasClass( "animated fadeOut" ) ) {
+
+			$('.map-system').removeClass('animated fadeOut');
+			$('.map-system').addClass('animated bounceInLeft');
+			console.log('entro2');
+
+		} else {
+
+			$('.map-system').removeClass('animated bounceInLeft');
+			$('.map-system').addClass('animated bounceOutLeft');
+			console.log('entro3');
+
+		}
+	});
+
+});
