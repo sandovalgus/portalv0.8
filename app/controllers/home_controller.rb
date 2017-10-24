@@ -5,7 +5,7 @@ before_action :authenticate_user!
    
     if params[:search].nil?
       # sin busqueda
-      @customers= Customer.includes(:addresses).all
+      @customers= Customer.includes(:addresses).all.paginate(page: params[:page], per_page: 10)
 
       # Mostrar Zonas
       @zones= Zone.all

@@ -24,6 +24,7 @@ Search: <input id="search" name="search" type="text" autocomplete="off" title="S
 </div>                                                                                
   <div class="table-responsive banner">
 
+  <%= will_paginate @customers %>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -34,7 +35,6 @@ Search: <input id="search" name="search" type="text" autocomplete="off" title="S
       </tr>
     </thead>
     <tbody>
-      <%= will_paginate @customers %>
       <% @customers.each do |customer| %>
         <tr>
           <td><%= customer.n_socio %></td>
@@ -59,10 +59,10 @@ Search: <input id="search" name="search" type="text" autocomplete="off" title="S
 
         </tr>
       <% end %>
-      <%= will_paginate @customers %>
 
     </tbody>
   </table>
+  <%= will_paginate @customers %> 
   </div>
 
 
