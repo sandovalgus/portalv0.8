@@ -297,9 +297,11 @@ function createMapZone(items){
 //mostrar tdas las zonas ************
 function drawZone (items){
 var area = [];
- var mizona = items[0].zone;
  
- for (var j = 0; j < items.length; j++){
+if (items[0] != undefined) {
+ var mizona = items[0].zone;
+
+   for (var j = 0; j < items.length; j++){
     if (items[j].zone == mizona){
       area.push(items[j]);
     }else if (items[j].zone != undefined ){
@@ -321,6 +323,9 @@ var area = [];
 
     }
  }
+
+}; 
+
 if(j==items.length){
         poligonoArea = handler.addPolygons({
         paths: area,
@@ -333,6 +338,7 @@ if(j==items.length){
     handler.bounds.extendWith(poligonoArea);
 
 }
+
 }
 
 

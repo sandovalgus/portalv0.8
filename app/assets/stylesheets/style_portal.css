@@ -34,13 +34,38 @@ padding: 5px;
 
 }
 
+.btn-undo {
+  position: relative;
+  z-index: 20;
+  height: 100%;
+}
+
+.fa.fa-undo{
+  margin-top: 8px;
+  margin-left: 115px;
+  position: absolute;
+  background: #E86458;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.fa.fa-undo:hover{
+  margin-top: 8px;
+  margin-left: 115px;
+  position: absolute;
+  background: #F75C54;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+
 /*mao*/
 
 .map-system {
   z-index: 1;
   width: auto;
   height: auto;
-  padding: 15px;
+  padding: 1px;
   background-color: white;
   /*z-index: 1;*/
   position: fixed;

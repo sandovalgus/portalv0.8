@@ -22,34 +22,34 @@
 
 $(document).ready(function(){
 
+	if ($( ".map-system" ).hasClass( "map-system-down" ) && !$( ".map-system" ).hasClass( "animated" ) ) {
+		$('.map-system').removeClass('map-system-down');				
+		$('.map-system').addClass('animated bounceOutLeft');
+		
+	};
+
 	$('#mapa').click( function(  ) {
 		
 		if ($( ".map-system" ).hasClass( "map-system-down" )) {
 			$('.map-system').removeClass('map-system-down');				
-			console.log('entro/downs');
+			$('.map-system').addClass('animated bounceOutLeft');
 			
 		};
 
-		if ( $( ".map-system" ).hasClass( "animated bounceOutLeft" )) {
+
+		if ( $( ".map-system" ).hasClass( 'animated bounceOutLeft' )) {
 
 			$('.map-system').removeClass('animated bounceOutLeft');
 			$('.map-system').addClass('animated bounceInLeft');
 
-			console.log('entro1');
 
-		} else if ( $( ".map-system" ).hasClass( "animated fadeOut" ) ) {
-
-			$('.map-system').removeClass('animated fadeOut');
-			$('.map-system').addClass('animated bounceInLeft');
-			console.log('entro2');
-
-		} else {
+		} else if ( $( ".map-system" ).hasClass( 'animated bounceInLeft' ) ) {
 
 			$('.map-system').removeClass('animated bounceInLeft');
 			$('.map-system').addClass('animated bounceOutLeft');
-			console.log('entro3');
 
-		}
+		} 
+
 	});
 
 });

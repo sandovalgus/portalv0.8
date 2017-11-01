@@ -105,10 +105,16 @@ class CustomersController < ApplicationController
 
   def import
     #Customer.import(params[:file])
-    ext = params[:file]
-    ImportWorker.perform_async(ext.path, ext)
 
-    redirect_to root_url, notice: "Los se están importando. Te estaremos avisando cuando estén listos."
+    if params[:file].blank?
+      flash[:error] = 'Debes seleccionar un archivo valido.'
+      redirect_to '/customers/load'
+    else
+      ext = params[:file]
+      ImportWorker.perform_async(ext.path, ext)
+      redirect_to root_url, notice: "Los se están importando. Te estaremos avisando cuando estén listos."
+    end
+
   end
 
   def load

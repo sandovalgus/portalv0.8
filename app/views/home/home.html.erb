@@ -5,11 +5,12 @@
 	 <h2>Clientes</h2>
 </div>
  
-
-
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="map-system floating-map">
+    <div class="map-system map-system-down floating-map">
+      <div id="reloadmap" class="reloadmap btn-undo" title="Recargar mapa">
+        <i class="fa fa-undo" aria-hidden="true"></i>
+      </div>
       <div id="map" class="map"></div>
     </div> 
   </div>
@@ -76,26 +77,21 @@ Search: <input id="search" name="search" type="text" autocomplete="off" title="S
   // viewZonesAll(<%=raw @polyjson %>, 1);}
   actualizado = false;
   $(document).ready(function() {
-   viewZonesAll(<%=raw @polyjson %>, 1);
-   initMap(<%=raw @map_hash.to_json %>, 1);
+     viewZonesAll(<%=raw @polyjson %>, 1);
+     initMap(<%=raw @map_hash.to_json %>, 1);
 
-
-
-});
-   $(function(){
+  });
+   
+  $(function(){
       function funcAvisa(){
 
-      /* Consulta a la BD */
-
-         // alert("The button was clicked.");
-         
         $.ajax({
            url: "/customers/check",
            type: "POST",
            //data: { "nombre_zona":nombre_zona },
            dataType: "json",
            success: function(data) {
-              console.log(data);
+              //console.log(data);
 
               if (data == true) {
                 new PNotify({
@@ -114,8 +110,8 @@ Search: <input id="search" name="search" type="text" autocomplete="off" title="S
 
 
               } else {
-               console.log(data);
-               console.log("sin novedades...");
+               /*console.log(data);
+               console.log("sin novedades...");*/
               }
 
 
@@ -129,5 +125,31 @@ Search: <input id="search" name="search" type="text" autocomplete="off" title="S
       setInterval(funcAvisa,10000);
     });
 // mapsMarkerZones(<%=raw @map_hash.to_json  %>,<%=raw @polyjson %>, 1);
-  
+  $('.reloadmap').click( function() {
+    viewZonesAll(<%=raw @polyjson %>, 1);
+    initMap(<%=raw @map_hash.to_json %>, 1);
+  });
+
+  $('#mapa').click( function() {
+    if ($( ".map-system" ).hasClass( "map-system-down" )) {
+      $('.map-system').removeClass('map-system-down');        
+      $('.map-system').addClass('animated bounceOutLeft');      
+    };
+
+
+    if ( $( ".map-system" ).hasClass( 'animated bounceOutLeft' )) {
+
+      $('.map-system').removeClass('animated bounceOutLeft');
+      $('.map-system').addClass('animated bounceInLeft');
+      $('.reloadmap').click();
+
+    } else if ( $( ".map-system" ).hasClass( 'animated bounceInLeft' ) ) {
+
+      $('.map-system').removeClass('animated bounceInLeft');
+      $('.map-system').addClass('animated bounceOutLeft');
+    } 
+    
+  });
+
+
 </script>
