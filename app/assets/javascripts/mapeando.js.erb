@@ -8,6 +8,8 @@
   var zoom = 11;// zoom del mapa 
   var areas = [];
   var ctrlNewZone =0;
+  var flag_edit_markers_zone = 0;// 0 no edit, 1 edit ok
+  var remove_zone_edit = 0;
  
 //position central del mapa
 function positionCenter(pos, items){
@@ -62,8 +64,6 @@ function updateFormLocation(latLng) {
    // longitude.innerHTML=(latLng.lng());
 
 } 
-
-
 
 
 
@@ -127,15 +127,6 @@ function initMap(items, vista){
 
 
 
-
-
-
-
-
-
-
-
-
 //***********************************************
 //*********************ZONAS*********************
 //***********************************************
@@ -151,6 +142,7 @@ document.addEventListener("turbolinks:load", function() {
          var nombre_zona = document.getElementById('zone_nombre_zona').value;
          var color = document.getElementById('zone_color').value;
          var id = document.getElementById('id').value;
+         var status_edit = flag_edit_markers_zone;
 
          console.log("id de la zona "+id);
          $.ajax({
@@ -160,7 +152,9 @@ document.addEventListener("turbolinks:load", function() {
            
             "nombre_zona":nombre_zona,
             "color":color,
-            "area": area},
+            "area": area,
+            "status_z": status_edit
+          },
            dataType: "json",
            success: function(data) {
 
@@ -182,7 +176,7 @@ document.addEventListener("turbolinks:load", function() {
            data: {
             "nombre_zona":nombre_zona,
             "color":color,
-            "area": area},
+            "area": area,},
            dataType: "json",
            success: function(data) {
 
@@ -197,18 +191,19 @@ document.addEventListener("turbolinks:load", function() {
    
 
     if (markersCount >=3 && dibujado == false) {
-      
+    
+
       poligonoArea = handler.addPolygons({
         paths: area,
-        strokeColor: '#ff4c4c',
+        strokeColor: '#E7F10F',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#ff4c4c',
+        fillColor: '#E7F10F',
         fillOpacity: 0.35
       });
 
-        console.log("dibujando area");
-        handler.bounds.extendWith(poligonoArea);
+         handler.bounds.extendWith(poligonoArea);
+
         dibujado = true;
          $('#guardarDatosZona').attr("disabled", false);
         // $('#guardarEdicionZona').attr("disabled", false);
@@ -218,27 +213,14 @@ document.addEventListener("turbolinks:load", function() {
   });
 
 
-  $("#borrar").click(function(){
-    console.log("intro.....");
-    // if (markersCount > 0) {
-      // for (var i = 0; i < markersCount; i++) {
-      //   markers[i].setMap(null);
-      // }
-    // }
+ 
+      $("#borrar").click(function(){
 
-    // if (dibujado) {
+        remove_zone_edit =1;
+        createMapZone();
+        remove_zone_edit =0;
 
-     // poligonoArea.setMap(null);
-      dibujado = false;
-      area = [];
-      markers = [];
-      markersCount = 0;
-
-
-      
-    // }
-
-  });
+      });
 
 
 
@@ -256,7 +238,7 @@ function createMapZone(items){
     handler.getMap().setCenter(positionCenter(1, 0));// centra el mapa en lng lat
     handler.getMap().setZoom(zoom);// zoom map x veces
     //handler.fitMapToBounds();
-    if (items != null){
+    if (items != null && remove_zone_edit==0){
       drawZone(items);
     }
 
@@ -280,6 +262,7 @@ function createMapZone(items){
               );
               markers[markersCount] = newmarker;
               markersCount += 1;
+              flag_edit_markers_zone=1;
 
               console.log("sumando markers "+markersCount);
               if (markersCount >=3){$('#btnmarcar').attr("disabled", false);}

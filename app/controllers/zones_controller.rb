@@ -89,12 +89,25 @@ class ZonesController < ApplicationController
 
      @zone = Zone.find(params[:id])
      @zone.nombre_zona = params["nombre_zona"]
+      has = params["area"].to_json
+      data_has =  JSON.parse(has)
 
-    # @coordenada = CoordinateZone.where('zone_id = ?', @zone.id)
-    # @coordenada.each do |cz|
-    #   cz.destroy
-    # end
+    if params[:status_z] == "1"
+        @coordenada = CoordinateZone.where('zone_id = ?', @zone.id)
+        @coordenada.each do |cz|
+          cz.destroy
+        end
 
+        data_has.each do |geo|
+          @coordenada = CoordinateZone.new()
+          geo.each do |data|
+            @coordenada.zone_id = @zone.id
+            @coordenada.latitud =  data["lat"].to_f
+            @coordenada.longitud = data["lng"].to_f 
+          end
+          @coordenada.save
+        end
+    end
     respond_to do |format|
      if @zone.update(zone_params)
         format.html { redirect_to @zone, notice: 'Zone was successfully updated.' }
